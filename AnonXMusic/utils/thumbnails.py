@@ -28,6 +28,16 @@ def clear(text):
             title += " " + i
     return title.strip()
 
+def circle(img): 
+     h,w=img.size 
+     a = Image.new('L', [h,w], 0) 
+     b = ImageDraw.Draw(a) 
+     b.pieslice([(0, 0), (h,w)], 0, 360, fill = 255,outline = "white") 
+     c = np.array(img) 
+     d = np.array(a) 
+     e = np.dstack((c, d)) 
+     return Image.fromarray(e)
+
 
 async def get_thumb(videoid):
     if os.path.isfile(f"cache/{videoid}.png"):
