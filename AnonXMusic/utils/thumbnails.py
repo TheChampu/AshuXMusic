@@ -82,7 +82,7 @@ async def get_thumb(videoid):
         background = enhancer.enhance(0.5)
         y=changeImageSize(100,100,circle(youtube)) 
          background.paste(y,(40,600),mask=y)
-        a=changeImageSize(100,100,circle(youtube)) 
+        a=changeImageSize(100,100,circle(xp)) 
          background.paste(a,(900,600),mask=a)
         draw = ImageDraw.Draw(background)
         arial = ImageFont.truetype("AnonXMusic/assets/font2.ttf", 30)
