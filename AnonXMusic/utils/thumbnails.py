@@ -46,55 +46,54 @@ async def get_thumb(videoid):
         return f"cache/{videoid}.png"
 
     url = f"https://www.youtube.com/watch?v={videoid}"
+    results = VideosSearch(url, limit=1)
+    for result in (await results.next())["result"]:
     try:
-        results = VideosSearch(url, limit=1)
-        for result in (await results.next())["result"]:
-            try:
-                title = result["title"]
-                title = re.sub("\W+", " ", title)
-                title = title.title()
-            except:
-                title = "Unsupported Title"
-            try:
-                duration = result["duration"]
-            except:
-                duration = "Unknown Mins"
-            thumbnail = result["thumbnails"][0]["url"].split("?")[0]
-            try:
-                views = result["viewCount"]["short"]
-            except:
-                views = "Unknown Views"
-            try:
-                channel = result["channel"]["name"]
-            except:
-                channel = "Unknown Channel"
+    title = result["title"]
+    title = re.sub("\W+", " ", title)
+    title = title.title()
+    except:
+    title = "Unsupported Title"
+    try:
+    duration = result["duration"]
+    except:
+    duration = "Unknown Mins"
+    thumbnail = result["thumbnails"][0]["url"].split("?")[0]
+    try:
+    views = result["viewCount"]["short"]
+    except:
+    views = "Unknown Views"
+    try:
+    channel = result["channel"]["name"]
+    except:
+    channel = "Unknown Channel"
 
-        async with aiohttp.ClientSession() as session:
-            async with session.get(thumbnail) as resp:
-                if resp.status == 200:
-                    f = await aiofiles.open(f"cache/thumb{videoid}.png", mode="wb")
-                    await f.write(await resp.read())
-                    await f.close()
+    async with aiohttp.ClientSession() as session:
+    async with session.get(thumbnail) as resp:
+    if resp.status == 200:
+    f = await aiofiles.open(f"cache/thumb{videoid}.png", mode="wb")
+    await f.write(await resp.read())
+    await f.close()
                 
-        aaa= await app.get_profile_photos(app.id) 
-        sp=await app.download_media(aaa[0]['file_id'],file_name=f'{app.id}.jpg')
-        xp=Image.open(sp)
+    aaa= await app.get_profile_photos(app.id) 
+    sp=await app.download_media(aaa[0]['file_id'],file_name=f'{app.id}.jpg')
+    xp=Image.open(sp)
         
-        youtube = Image.open(f"cache/thumb{videoid}.png")
-        image1 = changeImageSize(1280, 720, youtube)
-        image2 = image1.convert("RGBA")
-        background = image2.filter(filter=ImageFilter.BoxBlur(10))
-        enhancer = ImageEnhance.Brightness(background)
-        background = enhancer.enhance(0.5)
-        y=changeImageSize(100,100,circle(youtube)) 
-        background.paste(y,(40,600),mask=y)
-        a=changeImageSize(100,100,circle(xp)) 
-        background.paste(a,(900,600),mask=a)
-        draw = ImageDraw.Draw(background)
-        arial = ImageFont.truetype("AnonXMusic/assets/font2.ttf", 30)
-        font = ImageFont.truetype("AnonXMusic/assets/font.ttf", 30)
-        draw.text((1110, 8), unidecode(app.name), fill="white", font=arial)
-        draw.text(
+    youtube = Image.open(f"cache/thumb{videoid}.png")
+    image1 = changeImageSize(1280, 720, youtube)
+    image2 = image1.convert("RGBA")
+    background = image2.filter(filter=ImageFilter.BoxBlur(10))
+    enhancer = ImageEnhance.Brightness(background)
+    background = enhancer.enhance(0.5)
+    y=changeImageSize(100,100,circle(youtube)) 
+    background.paste(y,(40,600),mask=y)
+    a=changeImageSize(100,100,circle(xp)) 
+    background.paste(a,(900,600),mask=a)
+    draw = ImageDraw.Draw(background)
+    arial = ImageFont.truetype("AnonXMusic/assets/font2.ttf", 30)
+    font = ImageFont.truetype("AnonXMusic/assets/font.ttf", 30)
+    draw.text((1110, 8), unidecode(app.name), fill="white", font=arial)
+    draw.text(
             (55, 560),
             f"{channel} | {views[:23]}",
             (255, 255, 255),
@@ -136,6 +135,3 @@ async def get_thumb(videoid):
             pass
         background.save(f"cache/{videoid}.png")
         return f"cache/{videoid}.png"
-    except Exception as e:
-        print(e)
-        return YOUTUBE_IMG_URL
