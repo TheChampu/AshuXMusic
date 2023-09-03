@@ -73,7 +73,11 @@ async def get_thumb(videoid):
                     f = await aiofiles.open(f"cache/thumb{videoid}.png", mode="wb")
                     await f.write(await resp.read())
                     await f.close()
-
+                
+        aaa= await app.get_profile_photos(app.id) 
+        sp=await app.download_media(aaa[0]['file_id'],file_name=f'{app.id}.jpg')
+        xp=Image.open(sp)
+        
         youtube = Image.open(f"cache/thumb{videoid}.png")
         image1 = changeImageSize(1280, 720, youtube)
         image2 = image1.convert("RGBA")
@@ -81,9 +85,9 @@ async def get_thumb(videoid):
         enhancer = ImageEnhance.Brightness(background)
         background = enhancer.enhance(0.5)
         y=changeImageSize(100,100,circle(youtube)) 
-         background.paste(y,(40,600),mask=y)
+        background.paste(y,(40,600),mask=y)
         a=changeImageSize(100,100,circle(xp)) 
-         background.paste(a,(900,600),mask=a)
+        background.paste(a,(900,600),mask=a)
         draw = ImageDraw.Draw(background)
         arial = ImageFont.truetype("AnonXMusic/assets/font2.ttf", 30)
         font = ImageFont.truetype("AnonXMusic/assets/font.ttf", 30)
