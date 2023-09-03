@@ -19,15 +19,6 @@ def changeImageSize(maxWidth, maxHeight, image):
     newImage = image.resize((newWidth, newHeight))
     return newImage
 
-
-def clear(text):
-    list = text.split(" ")
-    title = ""
-    for i in list:
-        if len(title) + len(i) < 60:
-            title += " " + i
-    return title.strip()
-
 def circle(img): 
      h,w=img.size 
      a = Image.new('L', [h,w], 0) 
@@ -37,6 +28,15 @@ def circle(img):
      d = np.array(a) 
      e = np.dstack((c, d)) 
      return Image.fromarray(e)
+
+
+def clear(text):
+    list = text.split(" ")
+    title = ""
+    for i in list:
+        if len(title) + len(i) < 60:
+            title += " " + i
+    return title.strip()
 
 
 async def get_thumb(videoid):
