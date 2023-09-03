@@ -99,39 +99,39 @@ async def get_thumb(videoid):
             (255, 255, 255),
             font=arial,
         )
-        draw.text(
+    draw.text(
             (57, 600),
             clear(title),
             (255, 255, 255),
             font=font,
         )
-        draw.line(
+    draw.line(
             [(55, 660), (1220, 660)],
             fill="white",
             width=5,
             joint="curve",
         )
-        draw.ellipse(
+    draw.ellipse(
             [(918, 648), (942, 672)],
             outline="white",
             fill="white",
             width=15,
         )
-        draw.text(
+    draw.text(
             (36, 685),
             "00:00",
             (255, 255, 255),
             font=arial,
         )
-        draw.text(
+    draw.text(
             (1185, 685),
             f"{duration[:23]}",
             (255, 255, 255),
             font=arial,
         )
-        try:
-            os.remove(f"cache/thumb{videoid}.png")
-        except:
-            pass
-        background.save(f"cache/{videoid}.png")
-        return f"cache/{videoid}.png"
+    try:
+    os.remove(f"cache/thumb{videoid}.png")
+    except:
+    pass
+    background.save(f"cache/{videoid}.png")
+    return f"cache/{videoid}.png"
