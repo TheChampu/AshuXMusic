@@ -75,7 +75,7 @@ async def get_thumb(videoid):
                 await f.write(await resp.read())
                 await f.close()
                 
-    aaa= await app.get_profile_photos(app.id) 
+    aaa=await app.get_profile_photos(app.id) 
     sp=await app.download_media(aaa[0]['file_id'],file_name=f'{app.id}.jpg')
     xp=Image.open(sp)
         
