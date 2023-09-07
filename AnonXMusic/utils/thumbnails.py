@@ -58,7 +58,7 @@ async def get_thumb(videoid):
             duration = result["duration"]
         except:
             duration = "Unknown Mins"
-            thumbnail = result["thumbnails"][0]["url"].split("?")[0]
+        thumbnail = result["thumbnails"][0]["url"].split("?")[0]
         try:
             views = result["viewCount"]["short"]
         except:
