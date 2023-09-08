@@ -21,15 +21,16 @@ class Anony(Client):
 
     async def start(self):
         await super().start()
-        self.id = self.me.id
+        get_me = await self.get_me()
+        self.username = get_me.username
+        self.id = get_me.id
         self.name = self.me.first_name + " " + (self.me.last_name or "")
-        self.username = self.me.username
         self.mention = self.me.mention
 
         try:
             await self.send_message(
                 chat_id=config.LOGGER_ID,
-                text=f"<u><b>» {self.mention} ʙᴏᴛ sᴛᴀʀᴛᴇᴅ :</b><u>\n\nɪᴅ : <code>{self.id}</code>\nɴᴀᴍᴇ : {self.name}\nᴜsᴇʀɴᴀᴍᴇ : @{self.username}",
+                text=f"<u><b>» {self.mention} ʙᴏᴛ sᴛᴀʀᴛᴇᴅ :</b><u>\n\n ɪᴅ : <code>{self.id}</code>\nɴᴀᴍᴇ : {self.name}\nᴜsᴇʀɴᴀᴍᴇ : @{self.username}",
             )
         except (errors.ChannelInvalid, errors.PeerIdInvalid):
             LOGGER(__name__).error(
