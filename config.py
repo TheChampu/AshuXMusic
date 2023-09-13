@@ -16,7 +16,7 @@ BOT_TOKEN = getenv("BOT_TOKEN")
 # Get your mongo url from cloud.mongodb.com
 MONGO_DB_URI = getenv("MONGO_DB_URI", None)
 
-DURATION_LIMIT_MIN = int(getenv("DURATION_LIMIT", 60))
+DURATION_LIMIT_MIN = int(getenv("DURATION_LIMIT", 180))
 
 # Chat id of a group for logging bot's activities
 LOGGER_ID = int(getenv("LOGGER_ID", None))
@@ -32,7 +32,7 @@ HEROKU_API_KEY = getenv("HEROKU_API_KEY")
 
 UPSTREAM_REPO = getenv(
     "UPSTREAM_REPO",
-    "https://github.com/aashuxxD/AnonXMusic",
+    "https://github.com/Venomxboss/AnonXMusic",
 )
 UPSTREAM_BRANCH = getenv("UPSTREAM_BRANCH", "main")
 GIT_TOKEN = getenv(
@@ -78,7 +78,7 @@ confirmer = {}
 
 
 START_IMG_URL = getenv(
-    "START_IMG_URL", "https://graph.org/file/0e060af1507472ae46aca.jpg"
+    "START_IMG_URL", "https://graph.org/file/223722555eb2282028dc0.jpg"
 )
 PING_IMG_URL = getenv(
     "PING_IMG_URL", "https://graph.org/file/adbb6129d2e4153d7e0fc.jpg"
