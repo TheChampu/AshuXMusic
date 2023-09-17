@@ -4,12 +4,6 @@ from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 def stats_buttons(_, status):
     sudo = [
         InlineKeyboardButton(
-            text=_["SA_B_1"],
-            callback_data="TopOverall",
-        )
-    ]
-    sudo = [
-        InlineKeyboardButton(
             text=_["SA_B_2"],
             callback_data="bot_stats_sudo",
         ),
