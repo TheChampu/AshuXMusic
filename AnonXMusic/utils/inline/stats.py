@@ -2,7 +2,7 @@ from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 
 
 def stats_buttons(_, status):
-    not_sudo = [
+    sudo = [
         InlineKeyboardButton(
             text=_["SA_B_1"],
             callback_data="TopOverall",
